@@ -1,16 +1,17 @@
 {
-  "name": "oclif-hello-world",
-  "description": "oclif example Hello World CLI",
-  "version": "0.0.0",
-  "author": "Salesforce",
+  "name": "stag-cli",
+  "description": "Bitcoin Wallet For Machines & Humans Alike",
+  "version": "0.0.1",
+  "author": "POWCO",
   "bin": {
-    "oex": "./bin/run"
+    "stag": "./bin/run"
   },
-  "bugs": "https://github.com/oclif/hello-world/issues",
+  "bugs": "https://github.com/pow-co/stag-cli",
   "dependencies": {
     "@oclif/core": "^1.19.1",
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^2.1.7",
+    "@runonbitcoin/easy-b": "^0.2.2",
     "stag-wallet": "^0.0.12"
   },
   "devDependencies": {
@@ -38,15 +39,18 @@
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json"
   ],
-  "homepage": "https://github.com/oclif/hello-world",
+  "homepage": "https://stagwallet.io",
   "keywords": [
-    "oclif"
+    "oclif",
+    "wallet",
+    "blockchain",
+    "bitcoin"
   ],
   "license": "MIT",
   "main": "dist/index.js",
   "oclif": {
-    "bin": "oex",
-    "dirname": "oex",
+    "bin": "stag",
+    "dirname": "stag",
     "commands": "./dist/commands",
     "plugins": [
       "@oclif/plugin-help",
@@ -54,12 +58,27 @@
     ],
     "topicSeparator": " ",
     "topics": {
-      "hello": {
-        "description": "Say hello to the world and others"
+      "wallet": {
+        "description": "Managing Wallet Keys & Funds"
+      },
+      "pay": {
+        "description": "Pay Invoices with Payment Protocols"
+      },
+      "boost": {
+        "description": "Buy & Search Boost Proof of Work"
+      },
+      "onchain": {
+        "description": "Interact With Apps Using OnChain Messages"
+      },
+      "fs": {
+        "description": "Manage Files on The Blockchain FS"
       }
+    },
+    "macos": {
+      "identifier": "stagwallet"
     }
   },
-  "repository": "oclif/hello-world",
+  "repository": "stagwallet/stag-cli",
   "scripts": {
     "build": "shx rm -rf dist && tsc -b",
     "lint": "eslint . --ext .ts --config .eslintrc",

@@ -32,12 +32,20 @@ USAGE
 * [`oex hello PERSON`](#oex-hello-person)
 * [`oex hello world`](#oex-hello-world)
 * [`oex help [COMMAND]`](#oex-help-command)
+* [`oex onchain`](#oex-onchain)
+* [`oex onchain world`](#oex-onchain-world)
 * [`oex plugins`](#oex-plugins)
-* [`oex plugins:inspect PLUGIN...`](#oex-pluginsinspect-plugin)
 * [`oex plugins:install PLUGIN...`](#oex-pluginsinstall-plugin)
+* [`oex plugins:inspect PLUGIN...`](#oex-pluginsinspect-plugin)
+* [`oex plugins:install PLUGIN...`](#oex-pluginsinstall-plugin-1)
 * [`oex plugins:link PLUGIN`](#oex-pluginslink-plugin)
 * [`oex plugins:uninstall PLUGIN...`](#oex-pluginsuninstall-plugin)
+* [`oex plugins:uninstall PLUGIN...`](#oex-pluginsuninstall-plugin-1)
+* [`oex plugins:uninstall PLUGIN...`](#oex-pluginsuninstall-plugin-2)
 * [`oex plugins update`](#oex-plugins-update)
+* [`oex wallet`](#oex-wallet)
+* [`oex wallet addresses`](#oex-wallet-addresses)
+* [`oex wallet seed`](#oex-wallet-seed)
 
 ## `oex hello PERSON`
 
@@ -97,7 +105,46 @@ DESCRIPTION
   Display help for oex.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.10/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.19/src/commands/help.ts)_
+
+## `oex onchain`
+
+Say hello
+
+```
+USAGE
+  $ oex onchain -k <value> -a <value> -t <value> -c <value>
+
+FLAGS
+  -a, --app=<value>         (required) App namespace
+  -c, --content=<value>     (required) JSON string of message content
+  -k, --privatekey=<value>  (required) Private Key for Signing and Funds
+  -t, --type=<value>        (required) Type of message
+
+DESCRIPTION
+  Say hello
+
+EXAMPLES
+  $ stag onchain post --privatekey $KEY --app askbitcoin.ai --type question --content ''{"content": "Who is John Galt?"}'
+```
+
+_See code: [dist/commands/onchain/index.ts](https://github.com/oclif/hello-world/blob/v0.0.0/dist/commands/onchain/index.ts)_
+
+## `oex onchain world`
+
+Say hello world
+
+```
+USAGE
+  $ oex onchain world
+
+DESCRIPTION
+  Say hello world
+
+EXAMPLES
+  $ oex onchain world
+  hello world! (./src/commands/hello/world.ts)
+```
 
 ## `oex plugins`
 
@@ -117,7 +164,45 @@ EXAMPLES
   $ oex plugins
 ```
 
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.0.11/src/commands/plugins/index.ts)_
+_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.1.7/src/commands/plugins/index.ts)_
+
+## `oex plugins:install PLUGIN...`
+
+Installs a plugin into the CLI.
+
+```
+USAGE
+  $ oex plugins:install PLUGIN...
+
+ARGUMENTS
+  PLUGIN  Plugin to install.
+
+FLAGS
+  -f, --force    Run yarn install with force flag.
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Installs a plugin into the CLI.
+  Can be installed from npm or a git url.
+
+  Installation of a user-installed plugin will override a core plugin.
+
+  e.g. If you have a core plugin that has a 'hello' command, installing a user-installed plugin with a 'hello' command
+  will override the core plugin implementation. This is useful if a user needs to update core plugin functionality in
+  the CLI without the need to patch and update the whole CLI.
+
+
+ALIASES
+  $ oex plugins add
+
+EXAMPLES
+  $ oex plugins:install myplugin 
+
+  $ oex plugins:install https://github.com/someuser/someplugin
+
+  $ oex plugins:install someuser/someplugin
+```
 
 ## `oex plugins:inspect PLUGIN...`
 
@@ -159,7 +244,6 @@ FLAGS
 
 DESCRIPTION
   Installs a plugin into the CLI.
-
   Can be installed from npm or a git url.
 
   Installation of a user-installed plugin will override a core plugin.
@@ -167,6 +251,7 @@ DESCRIPTION
   e.g. If you have a core plugin that has a 'hello' command, installing a user-installed plugin with a 'hello' command
   will override the core plugin implementation. This is useful if a user needs to update core plugin functionality in
   the CLI without the need to patch and update the whole CLI.
+
 
 ALIASES
   $ oex plugins add
@@ -196,14 +281,60 @@ FLAGS
 
 DESCRIPTION
   Links a plugin into the CLI for development.
-
   Installation of a linked plugin will override a user-installed or core plugin.
 
   e.g. If you have a user-installed or core plugin that has a 'hello' command, installing a linked plugin with a 'hello'
   command will override the user-installed or core plugin implementation. This is useful for development work.
 
+
 EXAMPLES
   $ oex plugins:link myplugin
+```
+
+## `oex plugins:uninstall PLUGIN...`
+
+Removes a plugin from the CLI.
+
+```
+USAGE
+  $ oex plugins:uninstall PLUGIN...
+
+ARGUMENTS
+  PLUGIN  plugin to uninstall
+
+FLAGS
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Removes a plugin from the CLI.
+
+ALIASES
+  $ oex plugins unlink
+  $ oex plugins remove
+```
+
+## `oex plugins:uninstall PLUGIN...`
+
+Removes a plugin from the CLI.
+
+```
+USAGE
+  $ oex plugins:uninstall PLUGIN...
+
+ARGUMENTS
+  PLUGIN  plugin to uninstall
+
+FLAGS
+  -h, --help     Show CLI help.
+  -v, --verbose
+
+DESCRIPTION
+  Removes a plugin from the CLI.
+
+ALIASES
+  $ oex plugins unlink
+  $ oex plugins remove
 ```
 
 ## `oex plugins:uninstall PLUGIN...`
@@ -243,5 +374,60 @@ FLAGS
 
 DESCRIPTION
   Update installed plugins.
+```
+
+## `oex wallet`
+
+Say hello
+
+```
+USAGE
+  $ oex wallet -k <value> -a <value> -t <value> -c <value>
+
+FLAGS
+  -a, --app=<value>         (required) App namespace
+  -c, --content=<value>     (required) JSON string of message content
+  -k, --privatekey=<value>  (required) Private Key for Signing and Funds
+  -t, --type=<value>        (required) Type of message
+
+DESCRIPTION
+  Say hello
+
+EXAMPLES
+  $ stag onchain post --privatekey $KEY --app askbitcoin.ai --type question --content ''{"content": "Who is John Galt?"}'
+```
+
+_See code: [dist/commands/wallet/index.ts](https://github.com/oclif/hello-world/blob/v0.0.0/dist/commands/wallet/index.ts)_
+
+## `oex wallet addresses`
+
+Say hello world
+
+```
+USAGE
+  $ oex wallet addresses
+
+DESCRIPTION
+  Say hello world
+
+EXAMPLES
+  $ oex wallet addresses
+  hello world! (./src/commands/hello/world.ts)
+```
+
+## `oex wallet seed`
+
+Say hello world
+
+```
+USAGE
+  $ oex wallet seed
+
+DESCRIPTION
+  Say hello world
+
+EXAMPLES
+  $ oex wallet seed
+  hello world! (./src/commands/hello/world.ts)
 ```
 <!-- commandsstop -->
