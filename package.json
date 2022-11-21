@@ -1,7 +1,7 @@
 {
   "name": "stag-cli",
   "description": "Bitcoin Wallet For Machines & Humans Alike",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": "POWCO",
   "bin": {
     "stag": "./bin/run"
@@ -12,7 +12,8 @@
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^2.1.7",
     "@runonbitcoin/easy-b": "^0.2.2",
-    "stag-wallet": "^0.0.12"
+    "bsv": "^1.5.6",
+    "stag-wallet": "^0.0.15"
   },
   "devDependencies": {
     "@oclif/test": "^2.2.10",

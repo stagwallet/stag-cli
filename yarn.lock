@@ -951,6 +951,11 @@
   "resolved" "https://registry.npmjs.org/@types/node/-/node-15.14.9.tgz"
   "version" "15.14.9"
 
+"@types/node@11.11.6":
+  "integrity" "sha512-Exw4yUWMBXM3X+8oqzJNRqZSwUAaS4+7NdvHqQuFi/d+synz++xmX3QIf+BFqneW8N31R8Ky+sikfZUXq07ggQ=="
+  "resolved" "https://registry.npmjs.org/@types/node/-/node-11.11.6.tgz"
+  "version" "11.11.6"
+
 "@types/normalize-package-data@^2.4.0":
   "integrity" "sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw=="
   "resolved" "https://registry.npmjs.org/@types/normalize-package-data/-/normalize-package-data-2.4.1.tgz"
@@ -1573,6 +1578,16 @@
   "integrity" "sha512-PQu3Kyv9dM4FnwB7XGj1+HucW+ShvJzJqjuw1JkKVs1mWdwOKVcRjOi+pV9X52A0tNvrPCsPkbFFQb+wE1EAXw=="
   "resolved" "https://registry.npmjs.org/binaryextensions/-/binaryextensions-4.18.0.tgz"
   "version" "4.18.0"
+
+"bip39@^3.0.4":
+  "integrity" "sha512-YZKQlb752TrUWqHWj7XAwCSjYEgGAk+/Aas3V7NyjQeZYsztO8JnQUaCWhcnL4T+jL8nvB8typ2jRPzTlgugNw=="
+  "resolved" "https://registry.npmjs.org/bip39/-/bip39-3.0.4.tgz"
+  "version" "3.0.4"
+  dependencies:
+    "@types/node" "11.11.6"
+    "create-hash" "^1.1.0"
+    "pbkdf2" "^3.0.9"
+    "randombytes" "^2.0.1"
 
 "bitcoin-elliptic@^7.0.1":
   "integrity" "sha512-eJIERwXIIjJK7gfVoevk0G1CbYbxezZ6ePZXIxngjyI+QQHXWqXMbY+gpxsND8FCLvWl050fw6W+PVZge5fBHw=="
@@ -5478,7 +5493,7 @@
   "resolved" "https://registry.npmjs.org/pathval/-/pathval-1.1.1.tgz"
   "version" "1.1.1"
 
-"pbkdf2@^3.0.3", "pbkdf2@3.1.1":
+"pbkdf2@^3.0.3", "pbkdf2@^3.0.9", "pbkdf2@3.1.1":
   "integrity" "sha512-4Ejy1OPxi9f2tt1rRV7Go7zmfDQ+ZectEQz3VGUQhgq62HtIRPDyG/JtnwIxs6x3uNMwo2V7q1fMvKjb+Tnpqg=="
   "resolved" "https://registry.npmjs.org/pbkdf2/-/pbkdf2-3.1.1.tgz"
   "version" "3.1.1"
@@ -6314,13 +6329,14 @@
   "resolved" "https://registry.npmjs.org/stack-trace/-/stack-trace-0.0.10.tgz"
   "version" "0.0.10"
 
-"stag-wallet@^0.0.12":
-  "integrity" "sha512-SS41H9B3AqFi0JsWfLDwJ+Wh5xyaS2UB2MkU8ckVvTMYgH50a95EndzGr/HRx9+3nvCPiN/pSqf+Vlb+L34gpQ=="
-  "resolved" "https://registry.npmjs.org/stag-wallet/-/stag-wallet-0.0.12.tgz"
-  "version" "0.0.12"
+"stag-wallet@^0.0.15":
+  "integrity" "sha512-Uxe8Oq+1JzoW+bVpltjVaeZ9U7fntrn5wza7Eo/BA2M2Bos/7kMoTIwsSQQk5Kj6mMqDOvG+wVQHF4Z6pm8z/A=="
+  "resolved" "https://registry.npmjs.org/stag-wallet/-/stag-wallet-0.0.15.tgz"
+  "version" "0.0.15"
   dependencies:
     "anypay" "^0.1.0"
     "bignumber.js" "^9.1.0"
+    "bip39" "^3.0.4"
     "bsv-2" "npm:bsv@^2.0.10"
     "bsv-coinselect" "^4.2.5"
     "commander" "^9.4.1"
