@@ -16,104 +16,54 @@ oclif example Hello World CLI
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g oclif-hello-world
-$ oex COMMAND
+$ npm install -g stag-cli
+$ stag COMMAND
 running command...
-$ oex (--version)
-oclif-hello-world/0.0.0 darwin-x64 node-v16.13.1
-$ oex --help [COMMAND]
+$ stag (--version)
+stag-cli/0.1.1 darwin-x64 node-v16.13.1
+$ stag --help [COMMAND]
 USAGE
-  $ oex COMMAND
+  $ stag COMMAND
 ...
 ```
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`oex hello PERSON`](#oex-hello-person)
-* [`oex hello world`](#oex-hello-world)
-* [`oex help [COMMAND]`](#oex-help-command)
-* [`oex onchain`](#oex-onchain)
-* [`oex onchain world`](#oex-onchain-world)
-* [`oex plugins`](#oex-plugins)
-* [`oex plugins:install PLUGIN...`](#oex-pluginsinstall-plugin)
-* [`oex plugins:inspect PLUGIN...`](#oex-pluginsinspect-plugin)
-* [`oex plugins:install PLUGIN...`](#oex-pluginsinstall-plugin-1)
-* [`oex plugins:link PLUGIN`](#oex-pluginslink-plugin)
-* [`oex plugins:uninstall PLUGIN...`](#oex-pluginsuninstall-plugin)
-* [`oex plugins:uninstall PLUGIN...`](#oex-pluginsuninstall-plugin-1)
-* [`oex plugins:uninstall PLUGIN...`](#oex-pluginsuninstall-plugin-2)
-* [`oex plugins update`](#oex-plugins-update)
-* [`oex wallet`](#oex-wallet)
-* [`oex wallet addresses`](#oex-wallet-addresses)
-* [`oex wallet seed`](#oex-wallet-seed)
+* [`stag boost`](#stag-boost)
+* [`stag boost addresses`](#stag-boost-addresses)
+* [`stag boost seed`](#stag-boost-seed)
+* [`stag file`](#stag-file)
+* [`stag file seed`](#stag-file-seed)
+* [`stag file upload`](#stag-file-upload)
+* [`stag help [COMMAND]`](#stag-help-command)
+* [`stag init`](#stag-init)
+* [`stag onchain`](#stag-onchain)
+* [`stag onchain world`](#stag-onchain-world)
+* [`stag pay`](#stag-pay)
+* [`stag pay addresses`](#stag-pay-addresses)
+* [`stag pay seed`](#stag-pay-seed)
+* [`stag plugins`](#stag-plugins)
+* [`stag plugins:install PLUGIN...`](#stag-pluginsinstall-plugin)
+* [`stag plugins:inspect PLUGIN...`](#stag-pluginsinspect-plugin)
+* [`stag plugins:install PLUGIN...`](#stag-pluginsinstall-plugin-1)
+* [`stag plugins:link PLUGIN`](#stag-pluginslink-plugin)
+* [`stag plugins:uninstall PLUGIN...`](#stag-pluginsuninstall-plugin)
+* [`stag plugins:uninstall PLUGIN...`](#stag-pluginsuninstall-plugin-1)
+* [`stag plugins:uninstall PLUGIN...`](#stag-pluginsuninstall-plugin-2)
+* [`stag plugins update`](#stag-plugins-update)
+* [`stag run balances`](#stag-run-balances)
+* [`stag run nfts PERSON`](#stag-run-nfts-person)
+* [`stag wallet`](#stag-wallet)
+* [`stag wallet addresses`](#stag-wallet-addresses)
+* [`stag wallet seed`](#stag-wallet-seed)
 
-## `oex hello PERSON`
-
-Say hello
-
-```
-USAGE
-  $ oex hello [PERSON] -f <value>
-
-ARGUMENTS
-  PERSON  Person to say hello to
-
-FLAGS
-  -f, --from=<value>  (required) Who is saying hello
-
-DESCRIPTION
-  Say hello
-
-EXAMPLES
-  $ oex hello friend --from oclif
-  hello friend from oclif! (./src/commands/hello/index.ts)
-```
-
-_See code: [dist/commands/hello/index.ts](https://github.com/oclif/hello-world/blob/v0.0.0/dist/commands/hello/index.ts)_
-
-## `oex hello world`
-
-Say hello world
-
-```
-USAGE
-  $ oex hello world
-
-DESCRIPTION
-  Say hello world
-
-EXAMPLES
-  $ oex hello world
-  hello world! (./src/commands/hello/world.ts)
-```
-
-## `oex help [COMMAND]`
-
-Display help for oex.
-
-```
-USAGE
-  $ oex help [COMMAND] [-n]
-
-ARGUMENTS
-  COMMAND  Command to show help for.
-
-FLAGS
-  -n, --nested-commands  Include all nested commands in the output.
-
-DESCRIPTION
-  Display help for oex.
-```
-
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.19/src/commands/help.ts)_
-
-## `oex onchain`
+## `stag boost`
 
 Say hello
 
 ```
 USAGE
-  $ oex onchain -k <value> -a <value> -t <value> -c <value>
+  $ stag boost -k <value> -a <value> -t <value> -c <value>
 
 FLAGS
   -a, --app=<value>         (required) App namespace
@@ -128,31 +78,244 @@ EXAMPLES
   $ stag onchain post --privatekey $KEY --app askbitcoin.ai --type question --content ''{"content": "Who is John Galt?"}'
 ```
 
-_See code: [dist/commands/onchain/index.ts](https://github.com/oclif/hello-world/blob/v0.0.0/dist/commands/onchain/index.ts)_
+_See code: [dist/commands/boost/index.ts](https://github.com/stagwallet/stag-cli/blob/v0.1.1/dist/commands/boost/index.ts)_
 
-## `oex onchain world`
+## `stag boost addresses`
 
 Say hello world
 
 ```
 USAGE
-  $ oex onchain world
+  $ stag boost addresses
 
 DESCRIPTION
   Say hello world
 
 EXAMPLES
-  $ oex onchain world
+  $ stag boost addresses
   hello world! (./src/commands/hello/world.ts)
 ```
 
-## `oex plugins`
+## `stag boost seed`
+
+Say hello world
+
+```
+USAGE
+  $ stag boost seed
+
+DESCRIPTION
+  Say hello world
+
+EXAMPLES
+  $ stag boost seed
+  hello world! (./src/commands/hello/world.ts)
+```
+
+## `stag file`
+
+Say hello
+
+```
+USAGE
+  $ stag file -k <value> -a <value> -t <value> -c <value>
+
+FLAGS
+  -a, --app=<value>         (required) App namespace
+  -c, --content=<value>     (required) JSON string of message content
+  -k, --privatekey=<value>  (required) Private Key for Signing and Funds
+  -t, --type=<value>        (required) Type of message
+
+DESCRIPTION
+  Say hello
+
+EXAMPLES
+  $ stag onchain post --privatekey $KEY --app askbitcoin.ai --type question --content ''{"content": "Who is John Galt?"}'
+```
+
+_See code: [dist/commands/file/index.ts](https://github.com/stagwallet/stag-cli/blob/v0.1.1/dist/commands/file/index.ts)_
+
+## `stag file seed`
+
+Say hello world
+
+```
+USAGE
+  $ stag file seed
+
+DESCRIPTION
+  Say hello world
+
+EXAMPLES
+  $ stag file seed
+  hello world! (./src/commands/hello/world.ts)
+```
+
+## `stag file upload`
+
+Upload b:// files to the blockchain
+
+```
+USAGE
+  $ stag file upload -f <value> [-d <value>] [-n <value>] [-c <value>] [-k <value>]
+
+FLAGS
+  -c, --contentType=<value>  Name of file, defaults to name on the local file system
+  -d, --dryrun=<value>       Print transaction info but do not sign or transmit
+  -f, --filepath=<value>     (required) Path to file that you will upload to blockchain
+  -k, --key=<value>          Private key for signing and funding
+  -n, --name=<value>         Name of file, defaults to name on the local file system
+
+DESCRIPTION
+  Upload b:// files to the blockchain
+
+EXAMPLES
+  $ stag file upload --file /path/to/file.wav --name interview_with_her_snackness.wav
+```
+
+## `stag help [COMMAND]`
+
+Display help for stag.
+
+```
+USAGE
+  $ stag help [COMMAND] [-n]
+
+ARGUMENTS
+  COMMAND  Command to show help for.
+
+FLAGS
+  -n, --nested-commands  Include all nested commands in the output.
+
+DESCRIPTION
+  Display help for stag.
+```
+
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.19/src/commands/help.ts)_
+
+## `stag init`
+
+Create New Or Import Existing Wallet
+
+```
+USAGE
+  $ stag init [-c <value>] [-f <value>] [-s <value>]
+
+FLAGS
+  -c, --config=<value>  Path to config file that will store recovery keys
+  -f, --force=<value>   Destructively Overrides existing confiuration.
+  -s, --seed=<value>    Import recovery seed phrase instead of generating new keys
+
+DESCRIPTION
+  Create New Or Import Existing Wallet
+
+EXAMPLES
+  $ stag init --config=/etc/stag/config.json'
+```
+
+_See code: [dist/commands/init/index.ts](https://github.com/stagwallet/stag-cli/blob/v0.1.1/dist/commands/init/index.ts)_
+
+## `stag onchain`
+
+Say hello
+
+```
+USAGE
+  $ stag onchain -k <value> -a <value> -t <value> -c <value>
+
+FLAGS
+  -a, --app=<value>         (required) App namespace
+  -c, --content=<value>     (required) JSON string of message content
+  -k, --privatekey=<value>  (required) Private Key for Signing and Funds
+  -t, --type=<value>        (required) Type of message
+
+DESCRIPTION
+  Say hello
+
+EXAMPLES
+  $ stag onchain post --privatekey $KEY --app askbitcoin.ai --type question --content ''{"content": "Who is John Galt?"}'
+```
+
+_See code: [dist/commands/onchain/index.ts](https://github.com/stagwallet/stag-cli/blob/v0.1.1/dist/commands/onchain/index.ts)_
+
+## `stag onchain world`
+
+Say hello world
+
+```
+USAGE
+  $ stag onchain world
+
+DESCRIPTION
+  Say hello world
+
+EXAMPLES
+  $ stag onchain world
+  hello world! (./src/commands/hello/world.ts)
+```
+
+## `stag pay`
+
+Say hello
+
+```
+USAGE
+  $ stag pay -k <value> -a <value> -t <value> -c <value>
+
+FLAGS
+  -a, --app=<value>         (required) App namespace
+  -c, --content=<value>     (required) JSON string of message content
+  -k, --privatekey=<value>  (required) Private Key for Signing and Funds
+  -t, --type=<value>        (required) Type of message
+
+DESCRIPTION
+  Say hello
+
+EXAMPLES
+  $ stag onchain post --privatekey $KEY --app askbitcoin.ai --type question --content ''{"content": "Who is John Galt?"}'
+```
+
+_See code: [dist/commands/pay/index.ts](https://github.com/stagwallet/stag-cli/blob/v0.1.1/dist/commands/pay/index.ts)_
+
+## `stag pay addresses`
+
+Say hello world
+
+```
+USAGE
+  $ stag pay addresses
+
+DESCRIPTION
+  Say hello world
+
+EXAMPLES
+  $ stag pay addresses
+  hello world! (./src/commands/hello/world.ts)
+```
+
+## `stag pay seed`
+
+Say hello world
+
+```
+USAGE
+  $ stag pay seed
+
+DESCRIPTION
+  Say hello world
+
+EXAMPLES
+  $ stag pay seed
+  hello world! (./src/commands/hello/world.ts)
+```
+
+## `stag plugins`
 
 List installed plugins.
 
 ```
 USAGE
-  $ oex plugins [--core]
+  $ stag plugins [--core]
 
 FLAGS
   --core  Show core plugins.
@@ -161,18 +324,18 @@ DESCRIPTION
   List installed plugins.
 
 EXAMPLES
-  $ oex plugins
+  $ stag plugins
 ```
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.1.7/src/commands/plugins/index.ts)_
 
-## `oex plugins:install PLUGIN...`
+## `stag plugins:install PLUGIN...`
 
 Installs a plugin into the CLI.
 
 ```
 USAGE
-  $ oex plugins:install PLUGIN...
+  $ stag plugins:install PLUGIN...
 
 ARGUMENTS
   PLUGIN  Plugin to install.
@@ -194,23 +357,23 @@ DESCRIPTION
 
 
 ALIASES
-  $ oex plugins add
+  $ stag plugins add
 
 EXAMPLES
-  $ oex plugins:install myplugin 
+  $ stag plugins:install myplugin 
 
-  $ oex plugins:install https://github.com/someuser/someplugin
+  $ stag plugins:install https://github.com/someuser/someplugin
 
-  $ oex plugins:install someuser/someplugin
+  $ stag plugins:install someuser/someplugin
 ```
 
-## `oex plugins:inspect PLUGIN...`
+## `stag plugins:inspect PLUGIN...`
 
 Displays installation properties of a plugin.
 
 ```
 USAGE
-  $ oex plugins:inspect PLUGIN...
+  $ stag plugins:inspect PLUGIN...
 
 ARGUMENTS
   PLUGIN  [default: .] Plugin to inspect.
@@ -223,16 +386,16 @@ DESCRIPTION
   Displays installation properties of a plugin.
 
 EXAMPLES
-  $ oex plugins:inspect myplugin
+  $ stag plugins:inspect myplugin
 ```
 
-## `oex plugins:install PLUGIN...`
+## `stag plugins:install PLUGIN...`
 
 Installs a plugin into the CLI.
 
 ```
 USAGE
-  $ oex plugins:install PLUGIN...
+  $ stag plugins:install PLUGIN...
 
 ARGUMENTS
   PLUGIN  Plugin to install.
@@ -254,23 +417,23 @@ DESCRIPTION
 
 
 ALIASES
-  $ oex plugins add
+  $ stag plugins add
 
 EXAMPLES
-  $ oex plugins:install myplugin 
+  $ stag plugins:install myplugin 
 
-  $ oex plugins:install https://github.com/someuser/someplugin
+  $ stag plugins:install https://github.com/someuser/someplugin
 
-  $ oex plugins:install someuser/someplugin
+  $ stag plugins:install someuser/someplugin
 ```
 
-## `oex plugins:link PLUGIN`
+## `stag plugins:link PLUGIN`
 
 Links a plugin into the CLI for development.
 
 ```
 USAGE
-  $ oex plugins:link PLUGIN
+  $ stag plugins:link PLUGIN
 
 ARGUMENTS
   PATH  [default: .] path to plugin
@@ -288,16 +451,16 @@ DESCRIPTION
 
 
 EXAMPLES
-  $ oex plugins:link myplugin
+  $ stag plugins:link myplugin
 ```
 
-## `oex plugins:uninstall PLUGIN...`
+## `stag plugins:uninstall PLUGIN...`
 
 Removes a plugin from the CLI.
 
 ```
 USAGE
-  $ oex plugins:uninstall PLUGIN...
+  $ stag plugins:uninstall PLUGIN...
 
 ARGUMENTS
   PLUGIN  plugin to uninstall
@@ -310,17 +473,17 @@ DESCRIPTION
   Removes a plugin from the CLI.
 
 ALIASES
-  $ oex plugins unlink
-  $ oex plugins remove
+  $ stag plugins unlink
+  $ stag plugins remove
 ```
 
-## `oex plugins:uninstall PLUGIN...`
+## `stag plugins:uninstall PLUGIN...`
 
 Removes a plugin from the CLI.
 
 ```
 USAGE
-  $ oex plugins:uninstall PLUGIN...
+  $ stag plugins:uninstall PLUGIN...
 
 ARGUMENTS
   PLUGIN  plugin to uninstall
@@ -333,17 +496,17 @@ DESCRIPTION
   Removes a plugin from the CLI.
 
 ALIASES
-  $ oex plugins unlink
-  $ oex plugins remove
+  $ stag plugins unlink
+  $ stag plugins remove
 ```
 
-## `oex plugins:uninstall PLUGIN...`
+## `stag plugins:uninstall PLUGIN...`
 
 Removes a plugin from the CLI.
 
 ```
 USAGE
-  $ oex plugins:uninstall PLUGIN...
+  $ stag plugins:uninstall PLUGIN...
 
 ARGUMENTS
   PLUGIN  plugin to uninstall
@@ -356,17 +519,17 @@ DESCRIPTION
   Removes a plugin from the CLI.
 
 ALIASES
-  $ oex plugins unlink
-  $ oex plugins remove
+  $ stag plugins unlink
+  $ stag plugins remove
 ```
 
-## `oex plugins update`
+## `stag plugins update`
 
 Update installed plugins.
 
 ```
 USAGE
-  $ oex plugins update [-h] [-v]
+  $ stag plugins update [-h] [-v]
 
 FLAGS
   -h, --help     Show CLI help.
@@ -376,13 +539,53 @@ DESCRIPTION
   Update installed plugins.
 ```
 
-## `oex wallet`
+## `stag run balances`
+
+List balances of RUN fungible tokens
+
+```
+USAGE
+  $ stag run balances -s <value>
+
+FLAGS
+  -s, --seed=<value>  (required) Import recovery seed phrase instead of generating new keys
+
+DESCRIPTION
+  List balances of RUN fungible tokens
+
+EXAMPLES
+  $ stag run balances
+```
+
+## `stag run nfts PERSON`
 
 Say hello
 
 ```
 USAGE
-  $ oex wallet -k <value> -a <value> -t <value> -c <value>
+  $ stag run nfts [PERSON] -f <value>
+
+ARGUMENTS
+  PERSON  Person to say hello to
+
+FLAGS
+  -f, --from=<value>  (required) Who is saying hello
+
+DESCRIPTION
+  Say hello
+
+EXAMPLES
+  $ oex hello friend --from oclif
+  hello friend from oclif! (./src/commands/hello/index.ts)
+```
+
+## `stag wallet`
+
+Say hello
+
+```
+USAGE
+  $ stag wallet -k <value> -a <value> -t <value> -c <value>
 
 FLAGS
   -a, --app=<value>         (required) App namespace
@@ -397,37 +600,37 @@ EXAMPLES
   $ stag onchain post --privatekey $KEY --app askbitcoin.ai --type question --content ''{"content": "Who is John Galt?"}'
 ```
 
-_See code: [dist/commands/wallet/index.ts](https://github.com/oclif/hello-world/blob/v0.0.0/dist/commands/wallet/index.ts)_
+_See code: [dist/commands/wallet/index.ts](https://github.com/stagwallet/stag-cli/blob/v0.1.1/dist/commands/wallet/index.ts)_
 
-## `oex wallet addresses`
+## `stag wallet addresses`
 
 Say hello world
 
 ```
 USAGE
-  $ oex wallet addresses
+  $ stag wallet addresses
 
 DESCRIPTION
   Say hello world
 
 EXAMPLES
-  $ oex wallet addresses
+  $ stag wallet addresses
   hello world! (./src/commands/hello/world.ts)
 ```
 
-## `oex wallet seed`
+## `stag wallet seed`
 
 Say hello world
 
 ```
 USAGE
-  $ oex wallet seed
+  $ stag wallet seed
 
 DESCRIPTION
   Say hello world
 
 EXAMPLES
-  $ oex wallet seed
+  $ stag wallet seed
   hello world! (./src/commands/hello/world.ts)
 ```
 <!-- commandsstop -->
