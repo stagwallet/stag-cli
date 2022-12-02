@@ -1,5 +1,8 @@
 import {Command} from '@oclif/core'
 
+import { loadWallet } from '../../wallet'
+
+
 export default class World extends Command {
   static description = 'Say hello world'
 
@@ -13,7 +16,11 @@ hello world! (./src/commands/hello/world.ts)
 
   static args = []
 
+
   async run(): Promise<void> {
+    
+    const wallet = loadWallet()
+
     this.log('hello world! (./src/commands/hello/world.ts)')
   }
 }
