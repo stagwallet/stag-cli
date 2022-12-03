@@ -39,8 +39,6 @@ export default class Buy extends Command {
 
       if (flags.seed) {
 
-        console.log('SEED', flags.seed)
-
         wallet = fromBackupSeedPhrase(flags.seed)
 
       }
@@ -49,9 +47,7 @@ export default class Buy extends Command {
 
       const result = await boostpow(params)
 
-      console.log('boostpow.result', result)
-
-      this.log(result)
+      this.log(JSON.stringify(result))
 
     } catch(error) {
 
