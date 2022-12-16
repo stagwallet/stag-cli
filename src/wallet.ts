@@ -2,13 +2,14 @@
 const homedir = require('os').homedir();
 
 // @ts-ignore
-import { Bip39 } from 'bsv-2'
+import { Bip39, Bip32 } from 'bsv-2'
 
 // @ts-ignore
 import { HDPrivateKey } from 'bsv';
 
 interface LoadWalletOptions {
     configDirectory?: string;
+    name?: string;
 }
 
 const defaultOptions = {
@@ -19,11 +20,28 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 
 import { join } from 'path';
 
-export async function loadWallet(options: LoadWalletOptions= {}) {
+interface StagConfigJsonWallet {
+    name: string;
+    seed: string;
+    hdPrivateKey: string;
+    paymail?: string;
+    receiveAddress?: string;
+    changeAddress?: string;
+    runAddress?: string;
+}
+
+interface StagConfigJson {
+    wallets: StagConfigJsonWallet[];
+    current_wallet_name: string;
+}
+
+export async function loadWallet(options: LoadWalletOptions={}) {
 
     const directory = options.configDirectory || defaultOptions.configDirectory
 
     const configFilePath = `${directory}/config.json`
+
+    var name = options.name
 
     if (existsSync(directory)) {
 
@@ -31,11 +49,30 @@ export async function loadWallet(options: LoadWalletOptions= {}) {
 
             const config = JSON.parse(readFileSync(configFilePath, 'utf8'))
 
-            if (!config.wallet) {
+            if (!name) {
 
-                console.error(`config file does not contain wallet`)
+                if (!config.current_wallet_name) {
+
+                    throw new Error(`No wallet selected`)
+
+                } else {
+
+                    name = config.current_wallet_name
+                }
+
+            }
+
+            if (!config.wallets) {
+
+                console.error(`config file does not contain wallets`)
 
             } else {
+
+                const wallet: any = config.wallets.filter((wallet: any) => wallet.name === options.name)[0]
+
+                if (!wallet) {
+                    throw new Error(`Wallet ${options.name} not found`)
+                }
 
                 const { wallet: { seed, hdPrivateKey } } = config
 
@@ -59,7 +96,7 @@ export async function loadWallet(options: LoadWalletOptions= {}) {
 
 }
 
-export async function importWalletFromSeed(mnemonic: string) {
+export async function importWalletFromSeed({mnemonic, name }: {mnemonic: string, name: string}) {
 
     const directory = defaultOptions.configDirectory
 
@@ -69,16 +106,29 @@ export async function importWalletFromSeed(mnemonic: string) {
 
     }
 
-    if (existsSync(join(directory, 'config.json'))) {
+    var config: StagConfigJson | null = null;
 
-        throw new Error('wallet already imported')
+    const configFilePath = join(directory, 'config.json')
+
+
+    if (existsSync(configFilePath)) {
+
+        config = JSON.parse(readFileSync(configFilePath, 'utf8'))
+
+        if (config && config.wallets.filter((wallet: StagConfigJsonWallet) => wallet.name === name).length > 0) {
+                
+                throw new Error(`Error wallet already exists with name ${name}`)
+        }
     }
 
     try {
 
-        const hdPrivateKey = HDPrivateKey.fromSeed(Buffer.from(mnemonic, 'utf8'))
 
-        return createWallet(hdPrivateKey)
+    const seed = Bip39.fromString(mnemonic).toSeed().toString('hex')
+
+    const hdPrivateKey = HDPrivateKey.fromSeed(seed)
+
+    return createWallet({hdPrivateKey,name, mnemonic})
 
     } catch(error: any) {
 
@@ -89,7 +139,7 @@ export async function importWalletFromSeed(mnemonic: string) {
 
 }
 
-export async function createWallet(hdPrivateKey: any) {
+export async function createWallet({ mnemonic, hdPrivateKey, name }: { hdPrivateKey: any, name: string, mnemonic: string }): Promise<StagConfigJson> {
 
     const directory = defaultOptions.configDirectory
 
@@ -101,9 +151,17 @@ export async function createWallet(hdPrivateKey: any) {
 
     }
 
+    var config: StagConfigJson | null = null;
+
     if (existsSync(join(directory, 'config.json'))) {
 
-        throw new Error('wallet already imported')
+        config = JSON.parse(readFileSync(configFilePath, 'utf8'))
+
+        if (config && config.wallets.filter((wallet: StagConfigJsonWallet) => wallet.name === name).length > 0) {
+                
+                throw new Error(`Error wallet already exists with name ${name}`)
+        }
+
     }
 
     const bsvKey    = hdPrivateKey.deriveChild(`m/44'/236'/0'/0/0`).privateKey
@@ -111,20 +169,32 @@ export async function createWallet(hdPrivateKey: any) {
     const runKey    = hdPrivateKey.deriveChild(`m/44'/236'/0'/2/0`).privateKey
     const cancelKey = hdPrivateKey.deriveChild(`m/44'/236'/0'/3/0`).privateKey
 
-    const json = {
+    if (config === null) {
+
+        config = {
+            wallets: [],
+            current_wallet_name: name
+        }
+    }
+
+    config.wallets.push({
+
+        name,
+
+        seed: mnemonic,
 
         hdPrivateKey: hdPrivateKey.toString(),
 
-        bsvAddress: bsvKey.toAddress().toString(),
-
+        receiveAddress: bsvKey.toAddress().toString(),
+    
         changeAddress: changeKey.toAddress().toString(),
-
+    
         runAddress: runKey.toAddress().toString()
+    
+    })
 
-    }
+    writeFileSync(configFilePath, JSON.stringify(config, null, 2))
 
-    writeFileSync(configFilePath, JSON.stringify(json, null, 2))
-
-    return json
+    return config
 
 }

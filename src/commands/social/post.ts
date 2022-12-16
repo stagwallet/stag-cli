@@ -3,12 +3,13 @@ import { loadWallet } from '../../wallet';
 
 const { boostpow, Wallet, fromBackupSeedPhrase } = require('stag-wallet');
 
-export default class Buy extends Command {
-  static description = 'Place An Order To Buy BoostPow'
+export default class SocialPost extends Command {
+  static description = 'Post to the blockchain using bSocial protocol'
 
   static examples = [
-    `$ boostpow buy --content $TXID --difficulty 2.18 --satoshis 10_000_000`,
-    `$ boostpow buy -c $TXID -d 2.18 -s 10_000_000`,
+    `$ stag social post --content='#Big Announcement' --content-type=text/markdown`,
+    `$ stag social post --file=/path/to/my/big_announcement.md`,
+    `$ stag social comment --comment="Wow quite a profound statement you made there --txid=$OP_TXID`,
   ]
 
   static flags = {
@@ -25,16 +26,14 @@ export default class Buy extends Command {
 
     try {
 
-      const {flags} = await this.parse(Buy)
+      const {flags} = await this.parse(SocialPost)
 
-      const { difficulty, content, satoshis, tag, category } = flags
+      const { difficulty, content, satoshis } = flags
 
       const params = {
         content,
         satoshis,
-        difficulty: parseFloat(difficulty),
-        tag,
-        category
+        difficulty: parseFloat(difficulty)
       }
 
       var wallet = await loadWallet()

@@ -1,7 +1,7 @@
 {
   "name": "stag-cli",
   "description": "Bitcoin Wallet For Machines & Humans Alike",
-  "version": "0.1.2",
+  "version": "0.3.0",
   "author": "POWCO",
   "bin": {
     "stag": "./bin/run"
@@ -14,6 +14,9 @@
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^2.1.7",
     "@runonbitcoin/easy-b": "^0.2.2",
+    "@runonbitcoin/tokenkit": "^1.1.0",
+    "bip39": "^3.0.4",
+    "boostminer": "^0.5.1",
     "bsv": "^1.5.6",
     "conf-cli": "^0.1.9",
     "stag-wallet": "^0.0.16"
@@ -59,7 +62,6 @@
     "plugins": [
       "@oclif/plugin-help",
       "@oclif/plugin-not-found",
-      "@oclif/plugin-plugins",
       "@oclif/plugin-commands",
       "@oclif/plugin-autocomplete",
       "conf-cli"
@@ -68,6 +70,9 @@
     "topics": {
       "wallet": {
         "description": "Managing Wallet Keys & Funds"
+      },
+      "run": {
+        "description": "Manage Run Tokens"
       },
       "pay": {
         "description": "Pay Invoices with Payment Protocols"

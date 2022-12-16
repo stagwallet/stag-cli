@@ -7,10 +7,12 @@ WORKDIR /usr/src/app
 COPY package.json /usr/src/app/
 
 RUN npm install -g typescript
-RUN npm install -g ts-node
 RUN npm install 
 
 # Bundle app source
 COPY . /usr/src/app
 
-CMD npm start
+RUN npm run build
+
+RUN npx oclif pack deb
+

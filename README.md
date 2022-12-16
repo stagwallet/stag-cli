@@ -20,7 +20,7 @@ $ npm install -g stag-cli
 $ stag COMMAND
 running command...
 $ stag (--version)
-stag-cli/0.1.1 darwin-x64 node-v16.13.1
+stag-cli/0.2.0 darwin-x64 node-v16.13.1
 $ stag --help [COMMAND]
 USAGE
   $ stag COMMAND
@@ -29,16 +29,20 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`stag boost`](#stag-boost)
-* [`stag boost addresses`](#stag-boost-addresses)
-* [`stag boost seed`](#stag-boost-seed)
+* [`stag autocomplete [SHELL]`](#stag-autocomplete-shell)
+* [`stag boost buy`](#stag-boost-buy)
+* [`stag commands`](#stag-commands)
+* [`stag conf [KEY] [VALUE]`](#stag-conf-key-value)
 * [`stag file`](#stag-file)
 * [`stag file seed`](#stag-file-seed)
 * [`stag file upload`](#stag-file-upload)
 * [`stag help [COMMAND]`](#stag-help-command)
 * [`stag init`](#stag-init)
-* [`stag onchain`](#stag-onchain)
-* [`stag onchain world`](#stag-onchain-world)
+* [`stag onchain create`](#stag-onchain-create)
+* [`stag onchain findall`](#stag-onchain-findall)
+* [`stag onchain findone`](#stag-onchain-findone)
+* [`stag onchain findorcreate`](#stag-onchain-findorcreate)
+* [`stag onchain stream`](#stag-onchain-stream)
 * [`stag pay`](#stag-pay)
 * [`stag pay addresses`](#stag-pay-addresses)
 * [`stag pay seed`](#stag-pay-seed)
@@ -53,64 +57,125 @@ USAGE
 * [`stag plugins update`](#stag-plugins-update)
 * [`stag run balances`](#stag-run-balances)
 * [`stag run nfts PERSON`](#stag-run-nfts-person)
-* [`stag wallet`](#stag-wallet)
 * [`stag wallet addresses`](#stag-wallet-addresses)
+* [`stag wallet create`](#stag-wallet-create)
+* [`stag wallet import`](#stag-wallet-import)
 * [`stag wallet seed`](#stag-wallet-seed)
 
-## `stag boost`
+## `stag autocomplete [SHELL]`
 
-Say hello
+display autocomplete installation instructions
 
 ```
 USAGE
-  $ stag boost -k <value> -a <value> -t <value> -c <value>
+  $ stag autocomplete [SHELL] [-r]
+
+ARGUMENTS
+  SHELL  shell type
 
 FLAGS
-  -a, --app=<value>         (required) App namespace
-  -c, --content=<value>     (required) JSON string of message content
-  -k, --privatekey=<value>  (required) Private Key for Signing and Funds
-  -t, --type=<value>        (required) Type of message
+  -r, --refresh-cache  Refresh cache (ignores displaying instructions)
 
 DESCRIPTION
-  Say hello
+  display autocomplete installation instructions
 
 EXAMPLES
-  $ stag onchain post --privatekey $KEY --app askbitcoin.ai --type question --content ''{"content": "Who is John Galt?"}'
+  $ stag autocomplete
+
+  $ stag autocomplete bash
+
+  $ stag autocomplete zsh
+
+  $ stag autocomplete --refresh-cache
 ```
 
-_See code: [dist/commands/boost/index.ts](https://github.com/stagwallet/stag-cli/blob/v0.1.1/dist/commands/boost/index.ts)_
+_See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v1.3.6/src/commands/autocomplete/index.ts)_
 
-## `stag boost addresses`
+## `stag boost buy`
 
-Say hello world
+Place An Order To Buy BoostPow
 
 ```
 USAGE
-  $ stag boost addresses
+  $ stag boost buy -c <value> -d <value> -s <value> [--category <value>] [-t <value>] [-m <value>] [--seed
+    <value>]
+
+FLAGS
+  -c, --content=<value>     (required) Txid of content to boost
+  -d, --difficulty=<value>  (required) Difficulty for work order
+  -m, --miner=<value>       Public address of miner for contract
+  -s, --satoshis=<value>    (required) Value paid for job in satoshis
+  -t, --tag=<value>         Tag will be converted to hex
+  --category=<value>        Category will be converted to hex
+  --seed=<value>            Backup Seed Phrase Words
 
 DESCRIPTION
-  Say hello world
+  Place An Order To Buy BoostPow
 
 EXAMPLES
-  $ stag boost addresses
-  hello world! (./src/commands/hello/world.ts)
+  $ boostpow buy --content $TXID --difficulty 2.18 --satoshis 10_000_000
+
+  $ boostpow buy -c $TXID -d 2.18 -s 10_000_000
 ```
 
-## `stag boost seed`
+## `stag commands`
 
-Say hello world
+list all the commands
 
 ```
 USAGE
-  $ stag boost seed
+  $ stag commands [--json] [-h] [--hidden] [--tree] [--columns <value> | -x] [--sort <value>] [--filter
+    <value>] [--output csv|json|yaml |  | [--csv | --no-truncate]] [--no-header | ]
+
+FLAGS
+  -h, --help         Show CLI help.
+  -x, --extended     show extra columns
+  --columns=<value>  only show provided columns (comma-separated)
+  --csv              output is csv format [alias: --output=csv]
+  --filter=<value>   filter property by partial string matching, ex: name=foo
+  --hidden           show hidden commands
+  --no-header        hide table header from output
+  --no-truncate      do not truncate output to fit screen
+  --output=<option>  output in a more machine friendly format
+                     <options: csv|json|yaml>
+  --sort=<value>     property to sort by (prepend '-' for descending)
+  --tree             show tree of commands
+
+GLOBAL FLAGS
+  --json  Format output as json.
 
 DESCRIPTION
-  Say hello world
-
-EXAMPLES
-  $ stag boost seed
-  hello world! (./src/commands/hello/world.ts)
+  list all the commands
 ```
+
+_See code: [@oclif/plugin-commands](https://github.com/oclif/plugin-commands/blob/v2.2.1/src/commands/commands.ts)_
+
+## `stag conf [KEY] [VALUE]`
+
+manage configuration
+
+```
+USAGE
+  $ stag conf [KEY] [VALUE] [-h] [-k <value>] [-v <value>] [-d] [-p <value>] [-n <value>] [-d <value>]
+
+ARGUMENTS
+  KEY    key of the config
+  VALUE  value of the config
+
+FLAGS
+  -d, --cwd=<value>      config file location
+  -d, --delete           delete?
+  -h, --help             show CLI help
+  -k, --key=<value>      key of the config
+  -n, --name=<value>     config file name
+  -p, --project=<value>  project name
+  -v, --value=<value>    value of the config
+
+DESCRIPTION
+  manage configuration
+```
+
+_See code: [conf-cli](https://github.com/natzcam/conf-cli/blob/v0.1.9/src/commands/conf.ts)_
 
 ## `stag file`
 
@@ -133,7 +198,7 @@ EXAMPLES
   $ stag onchain post --privatekey $KEY --app askbitcoin.ai --type question --content ''{"content": "Who is John Galt?"}'
 ```
 
-_See code: [dist/commands/file/index.ts](https://github.com/stagwallet/stag-cli/blob/v0.1.1/dist/commands/file/index.ts)_
+_See code: [dist/commands/file/index.ts](https://github.com/stagwallet/stag-cli/blob/v0.2.0/dist/commands/file/index.ts)_
 
 ## `stag file seed`
 
@@ -213,45 +278,151 @@ EXAMPLES
   $ stag init --config=/etc/stag/config.json'
 ```
 
-_See code: [dist/commands/init/index.ts](https://github.com/stagwallet/stag-cli/blob/v0.1.1/dist/commands/init/index.ts)_
+_See code: [dist/commands/init/index.ts](https://github.com/stagwallet/stag-cli/blob/v0.2.0/dist/commands/init/index.ts)_
 
-## `stag onchain`
+## `stag onchain create`
 
-Say hello
+Create JSON Record Onchain
 
 ```
 USAGE
-  $ stag onchain -k <value> -a <value> -t <value> -c <value>
+  $ stag onchain create -a <value> -t <value> -c <value> [--json] [-s <value>] [-k <value>]
 
 FLAGS
   -a, --app=<value>         (required) App namespace
   -c, --content=<value>     (required) JSON string of message content
-  -k, --privatekey=<value>  (required) Private Key for Signing and Funds
+  -k, --privatekey=<value>  Private Key for Signing and Funds
   -t, --type=<value>        (required) Type of message
 
+GLOBAL FLAGS
+  -s, --seed=<value>  Mnemoic Backup Seed Phrase For Wallet.
+  --json              Format output as json.
+
 DESCRIPTION
-  Say hello
+  Create JSON Record Onchain
 
 EXAMPLES
-  $ stag onchain post --privatekey $KEY --app askbitcoin.ai --type question --content ''{"content": "Who is John Galt?"}'
+  $ stag onchain create --app askbitcoin.ai --type question --content ''{"content": "Who is John Galt?"}' --seed $BACKUP_SEED_PHRASE 
+
+FLAG DESCRIPTIONS
+  -s, --seed=<value>  Mnemoic Backup Seed Phrase For Wallet.
+
+    Mnemoic Backup Seed Phrase For Wallet.
 ```
 
-_See code: [dist/commands/onchain/index.ts](https://github.com/stagwallet/stag-cli/blob/v0.1.1/dist/commands/onchain/index.ts)_
+## `stag onchain findall`
 
-## `stag onchain world`
-
-Say hello world
+Find all matching JSON records
 
 ```
 USAGE
-  $ stag onchain world
+  $ stag onchain findall -a <value> [-t <value>] [-c <value>] [-l <value>] [-o <value>]
+
+FLAGS
+  -a, --app=<value>      (required) App namespace
+  -c, --content=<value>  JSON string of message content
+  -l, --limit=<value>    Number of records to return
+  -o, --offset=<value>   Offset results by a number of records
+  -t, --type=<value>     Type of message
 
 DESCRIPTION
-  Say hello world
+  Find all matching JSON records
 
 EXAMPLES
-  $ stag onchain world
-  hello world! (./src/commands/hello/world.ts)
+  $ stag onchain findall --app midasvalley.net --type watch_domain
+```
+
+## `stag onchain findone`
+
+Find JSON Record Onchain or Create if Missing
+
+```
+USAGE
+  $ stag onchain findone -a <value> -t <value> [--json] [-s <value>] [-k <value>] [-i <value>] [-c <value>]
+
+FLAGS
+  -a, --app=<value>         (required) App namespace
+  -c, --content=<value>     JSON string of message content
+  -i, --author=<value>      Author Identity
+  -k, --privatekey=<value>  Private Key for Signing and Funds
+  -t, --type=<value>        (required) Type of message
+
+GLOBAL FLAGS
+  -s, --seed=<value>  Mnemoic Backup Seed Phrase For Wallet.
+  --json              Format output as json.
+
+DESCRIPTION
+  Find JSON Record Onchain or Create if Missing
+
+EXAMPLES
+  $ stag onchain findone --app askbitcoin.ai --type question --content ''{"content": "Who is John Galt?"}' --privatekey $KEY 
+
+FLAG DESCRIPTIONS
+  -s, --seed=<value>  Mnemoic Backup Seed Phrase For Wallet.
+
+    Mnemoic Backup Seed Phrase For Wallet.
+```
+
+## `stag onchain findorcreate`
+
+Find JSON Record Onchain or Create if Missing
+
+```
+USAGE
+  $ stag onchain findorcreate -a <value> -t <value> -c <value> -c <value> [--json] [-s <value>] [-k <value>]
+
+FLAGS
+  -a, --app=<value>         (required) App namespace
+  -c, --defaults=<value>    (required) JSON string of message content
+  -c, --where=<value>       (required) JSON string of message content
+  -k, --privatekey=<value>  Private Key for Signing and Funds
+  -t, --type=<value>        (required) Type of message
+
+GLOBAL FLAGS
+  -s, --seed=<value>  Mnemoic Backup Seed Phrase For Wallet.
+  --json              Format output as json.
+
+DESCRIPTION
+  Find JSON Record Onchain or Create if Missing
+
+EXAMPLES
+  $ stag onchain findorcreate --app askbitcoin.ai --type question --content ''{"content": "Who is John Galt?"}' --privatekey $KEY 
+
+FLAG DESCRIPTIONS
+  -s, --seed=<value>  Mnemoic Backup Seed Phrase For Wallet.
+
+    Mnemoic Backup Seed Phrase For Wallet.
+```
+
+## `stag onchain stream`
+
+Find JSON Record Onchain or Create if Missing
+
+```
+USAGE
+  $ stag onchain stream -a <value> -t <value> -c <value> -c <value> [--json] [-s <value>] [-k <value>]
+
+FLAGS
+  -a, --app=<value>         (required) App namespace
+  -c, --defaults=<value>    (required) JSON string of message content
+  -c, --where=<value>       (required) JSON string of message content
+  -k, --privatekey=<value>  Private Key for Signing and Funds
+  -t, --type=<value>        (required) Type of message
+
+GLOBAL FLAGS
+  -s, --seed=<value>  Mnemoic Backup Seed Phrase For Wallet.
+  --json              Format output as json.
+
+DESCRIPTION
+  Find JSON Record Onchain or Create if Missing
+
+EXAMPLES
+  $ stag onchain findorcreate --app askbitcoin.ai --type question --content ''{"content": "Who is John Galt?"}' --privatekey $KEY 
+
+FLAG DESCRIPTIONS
+  -s, --seed=<value>  Mnemoic Backup Seed Phrase For Wallet.
+
+    Mnemoic Backup Seed Phrase For Wallet.
 ```
 
 ## `stag pay`
@@ -275,7 +446,7 @@ EXAMPLES
   $ stag onchain post --privatekey $KEY --app askbitcoin.ai --type question --content ''{"content": "Who is John Galt?"}'
 ```
 
-_See code: [dist/commands/pay/index.ts](https://github.com/stagwallet/stag-cli/blob/v0.1.1/dist/commands/pay/index.ts)_
+_See code: [dist/commands/pay/index.ts](https://github.com/stagwallet/stag-cli/blob/v0.2.0/dist/commands/pay/index.ts)_
 
 ## `stag pay addresses`
 
@@ -579,29 +750,6 @@ EXAMPLES
   hello friend from oclif! (./src/commands/hello/index.ts)
 ```
 
-## `stag wallet`
-
-Say hello
-
-```
-USAGE
-  $ stag wallet -k <value> -a <value> -t <value> -c <value>
-
-FLAGS
-  -a, --app=<value>         (required) App namespace
-  -c, --content=<value>     (required) JSON string of message content
-  -k, --privatekey=<value>  (required) Private Key for Signing and Funds
-  -t, --type=<value>        (required) Type of message
-
-DESCRIPTION
-  Say hello
-
-EXAMPLES
-  $ stag onchain post --privatekey $KEY --app askbitcoin.ai --type question --content ''{"content": "Who is John Galt?"}'
-```
-
-_See code: [dist/commands/wallet/index.ts](https://github.com/stagwallet/stag-cli/blob/v0.1.1/dist/commands/wallet/index.ts)_
-
 ## `stag wallet addresses`
 
 Say hello world
@@ -616,6 +764,49 @@ DESCRIPTION
 EXAMPLES
   $ stag wallet addresses
   hello world! (./src/commands/hello/world.ts)
+```
+
+## `stag wallet create`
+
+Create New Or Import Existing Wallet
+
+```
+USAGE
+  $ stag wallet create [--json] [-c <value>] [-f <value>] [-s <value>]
+
+FLAGS
+  -c, --config=<value>  Path to config file that will store recovery keys
+  -f, --force=<value>   Destructively Overrides existing confiuration.
+  -s, --seed=<value>    Import recovery seed phrase instead of generating new keys
+
+GLOBAL FLAGS
+  --json  Format output as json.
+
+DESCRIPTION
+  Create New Or Import Existing Wallet
+
+EXAMPLES
+  $ stag init --config=/etc/stag/config.json'
+```
+
+## `stag wallet import`
+
+Create New Or Import Existing Wallet
+
+```
+USAGE
+  $ stag wallet import [-c <value>] [-f <value>] [-s <value>]
+
+FLAGS
+  -c, --config=<value>  Path to config file that will store recovery keys
+  -f, --force=<value>   Destructively Overrides existing confiuration.
+  -s, --seed=<value>    Import recovery seed phrase instead of generating new keys
+
+DESCRIPTION
+  Create New Or Import Existing Wallet
+
+EXAMPLES
+  $ stag init --config=/etc/stag/config.json'
 ```
 
 ## `stag wallet seed`

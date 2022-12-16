@@ -2,10 +2,6 @@ import {Command, Flags} from '@oclif/core'
 
 const bsv = require('bsv')
 
-//const { run } = require('/Users/zyler/github/stagwallet/stag-wallet/src')
-
-//import { run } from '/Users/zyler/github/stagwallet/stag-wallet/src'
-
 const { fromBackupSeedPhrase } = require('stag-wallet')
 
 const axios = require('axios')
