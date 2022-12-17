@@ -1,6 +1,11 @@
 import {Command, Flags} from '@oclif/core'
+import { loadWallet } from '../../../wallet'
+
+import axios from 'axios'
 
 const tokenkit = require('@runonbitcoin/tokenkit')
+
+const Run = require('run-sdk')
 
 export default class GetRunFTBalance extends Command {
   static description = 'Get your balance of a fungible token'
@@ -11,15 +16,32 @@ export default class GetRunFTBalance extends Command {
   ]
 
   static flags = {
+    name: Flags.string({ char: 'n', description: 'Name of wallet to use', required: true}),
     origin: Flags.string({ char: 'o', description: 'Origin of Token to Send', required: true}),
   }
-
 
   async run(): Promise<void> {
 
     const {flags} = await this.parse(GetRunFTBalance)
 
-    const box = await tokenkit.ft.getJigBox(flags.origin)
+    const wallet = await loadWallet({ name: flags.name })
+
+    if (!wallet) {
+      throw new Error('Wallet not found. Please create a wallet first.')
+    }
+
+    const run = new Run({
+      purse: wallet.bsvKey.toWIF(),
+      owner: wallet.runKey.toWIF()
+    })
+
+    run.trust('*')
+
+    const url = `https://staging-backend.relayx.com/api/user/balance2/${wallet.runKey.toAddress().toString()}`
+
+    const { data } = await axios.get(url)
+
+    console.log('data', data)
 
     this.log(`Send RUN FT ${flags.amount} ${flags.origin} tokens to ${flags.to}`)
   }

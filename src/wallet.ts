@@ -35,6 +35,8 @@ interface StagConfigJson {
     current_wallet_name: string;
 }
 
+
+
 export async function loadWallet(options: LoadWalletOptions={}) {
 
     const directory = options.configDirectory || defaultOptions.configDirectory
@@ -68,13 +70,15 @@ export async function loadWallet(options: LoadWalletOptions={}) {
 
             } else {
 
-                const wallet: any = config.wallets.filter((wallet: any) => wallet.name === options.name)[0]
+                const wallet: any = config.wallets.filter((wallet: any) => wallet.name === name)[0]
 
                 if (!wallet) {
-                    throw new Error(`Wallet ${options.name} not found`)
+                    return null
                 }
 
-                const { wallet: { seed, hdPrivateKey } } = config
+                var { seed, hdPrivateKey } = wallet
+
+                hdPrivateKey = new HDPrivateKey(hdPrivateKey)
 
                 const bsvKey = hdPrivateKey.deriveChild(`m/44'/236'/0'/0/0`).privateKey
                 const changeKey = hdPrivateKey.deriveChild(`m/44'/236'/0'/1/0`).privateKey
@@ -82,11 +86,13 @@ export async function loadWallet(options: LoadWalletOptions={}) {
                 const cancelKey = hdPrivateKey.deriveChild(`m/44'/236'/0'/3/0`).privateKey
 
                 return {
-                    seed, hdPrivateKey, bsvKey, changeKey, runKey, cancelKey
+                    seed, hdPrivateKey, bsvKey, changeKey, runKey, cancelKey, config
                 }
             }
 
         } catch(error) {
+
+            console.error(error)
 
             console.error(`Invalid config file at ${configFilePath}`)
 

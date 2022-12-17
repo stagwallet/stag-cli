@@ -6761,7 +6761,7 @@
   dependencies:
     "queue-microtask" "^1.2.2"
 
-"run-sdk@*", "run-sdk@^0.6.35", "run-sdk@^0.6.37", "run-sdk@^0.6.38", "run-sdk@^0.6.40":
+"run-sdk@*", "run-sdk@^0.6.35", "run-sdk@^0.6.37", "run-sdk@^0.6.38", "run-sdk@^0.6.40", "run-sdk@^0.6.41":
   "integrity" "sha512-F3vFw2VkNoWCp2NH2cYdvWjjXitm9LldGFmq9+vmVr6Oj066BMj3qJ0iq45LEEQyhDViBJxbZG0c8mYJ0Gu+gw=="
   "resolved" "https://registry.npmjs.org/run-sdk/-/run-sdk-0.6.41.tgz"
   "version" "0.6.41"

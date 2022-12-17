@@ -21,6 +21,11 @@ export abstract class BaseCommand<T extends typeof Command> extends Command {
         description: 'Private Key for Signing and Funds',
         required: false
     }),
+    wallet: Flags.string({
+      char: 'w',
+      description: 'Wallet Name',
+      required: false
+    })
 
   }
 

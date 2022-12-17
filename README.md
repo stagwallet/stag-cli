@@ -20,7 +20,7 @@ $ npm install -g stag-cli
 $ stag COMMAND
 running command...
 $ stag (--version)
-stag-cli/0.2.0 darwin-x64 node-v16.13.1
+stag-cli/0.3.0 darwin-x64 node-v16.13.1
 $ stag --help [COMMAND]
 USAGE
   $ stag COMMAND
@@ -33,34 +33,31 @@ USAGE
 * [`stag boost buy`](#stag-boost-buy)
 * [`stag commands`](#stag-commands)
 * [`stag conf [KEY] [VALUE]`](#stag-conf-key-value)
-* [`stag file`](#stag-file)
-* [`stag file seed`](#stag-file-seed)
 * [`stag file upload`](#stag-file-upload)
 * [`stag help [COMMAND]`](#stag-help-command)
-* [`stag init`](#stag-init)
 * [`stag onchain create`](#stag-onchain-create)
 * [`stag onchain findall`](#stag-onchain-findall)
 * [`stag onchain findone`](#stag-onchain-findone)
 * [`stag onchain findorcreate`](#stag-onchain-findorcreate)
 * [`stag onchain stream`](#stag-onchain-stream)
-* [`stag pay`](#stag-pay)
-* [`stag pay addresses`](#stag-pay-addresses)
-* [`stag pay seed`](#stag-pay-seed)
-* [`stag plugins`](#stag-plugins)
-* [`stag plugins:install PLUGIN...`](#stag-pluginsinstall-plugin)
-* [`stag plugins:inspect PLUGIN...`](#stag-pluginsinspect-plugin)
-* [`stag plugins:install PLUGIN...`](#stag-pluginsinstall-plugin-1)
-* [`stag plugins:link PLUGIN`](#stag-pluginslink-plugin)
-* [`stag plugins:uninstall PLUGIN...`](#stag-pluginsuninstall-plugin)
-* [`stag plugins:uninstall PLUGIN...`](#stag-pluginsuninstall-plugin-1)
-* [`stag plugins:uninstall PLUGIN...`](#stag-pluginsuninstall-plugin-2)
-* [`stag plugins update`](#stag-plugins-update)
 * [`stag run balances`](#stag-run-balances)
-* [`stag run nfts PERSON`](#stag-run-nfts-person)
-* [`stag wallet addresses`](#stag-wallet-addresses)
+* [`stag run ft balance`](#stag-run-ft-balance)
+* [`stag run ft deploy PERSON`](#stag-run-ft-deploy-person)
+* [`stag run ft mint`](#stag-run-ft-mint)
+* [`stag run ft send PERSON`](#stag-run-ft-send-person)
+* [`stag social comment`](#stag-social-comment)
+* [`stag social follow`](#stag-social-follow)
+* [`stag social like`](#stag-social-like)
+* [`stag social post`](#stag-social-post)
+* [`stag social reply`](#stag-social-reply)
+* [`stag social repost`](#stag-social-repost)
+* [`stag social unfollow`](#stag-social-unfollow)
+* [`stag social unlike`](#stag-social-unlike)
+* [`stag wallet backup`](#stag-wallet-backup)
 * [`stag wallet create`](#stag-wallet-create)
 * [`stag wallet import`](#stag-wallet-import)
-* [`stag wallet seed`](#stag-wallet-seed)
+* [`stag wallet info`](#stag-wallet-info)
+* [`stag wallet use NAME`](#stag-wallet-use-name)
 
 ## `stag autocomplete [SHELL]`
 
@@ -177,45 +174,6 @@ DESCRIPTION
 
 _See code: [conf-cli](https://github.com/natzcam/conf-cli/blob/v0.1.9/src/commands/conf.ts)_
 
-## `stag file`
-
-Say hello
-
-```
-USAGE
-  $ stag file -k <value> -a <value> -t <value> -c <value>
-
-FLAGS
-  -a, --app=<value>         (required) App namespace
-  -c, --content=<value>     (required) JSON string of message content
-  -k, --privatekey=<value>  (required) Private Key for Signing and Funds
-  -t, --type=<value>        (required) Type of message
-
-DESCRIPTION
-  Say hello
-
-EXAMPLES
-  $ stag onchain post --privatekey $KEY --app askbitcoin.ai --type question --content ''{"content": "Who is John Galt?"}'
-```
-
-_See code: [dist/commands/file/index.ts](https://github.com/stagwallet/stag-cli/blob/v0.2.0/dist/commands/file/index.ts)_
-
-## `stag file seed`
-
-Say hello world
-
-```
-USAGE
-  $ stag file seed
-
-DESCRIPTION
-  Say hello world
-
-EXAMPLES
-  $ stag file seed
-  hello world! (./src/commands/hello/world.ts)
-```
-
 ## `stag file upload`
 
 Upload b:// files to the blockchain
@@ -257,28 +215,6 @@ DESCRIPTION
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.19/src/commands/help.ts)_
-
-## `stag init`
-
-Create New Or Import Existing Wallet
-
-```
-USAGE
-  $ stag init [-c <value>] [-f <value>] [-s <value>]
-
-FLAGS
-  -c, --config=<value>  Path to config file that will store recovery keys
-  -f, --force=<value>   Destructively Overrides existing confiuration.
-  -s, --seed=<value>    Import recovery seed phrase instead of generating new keys
-
-DESCRIPTION
-  Create New Or Import Existing Wallet
-
-EXAMPLES
-  $ stag init --config=/etc/stag/config.json'
-```
-
-_See code: [dist/commands/init/index.ts](https://github.com/stagwallet/stag-cli/blob/v0.2.0/dist/commands/init/index.ts)_
 
 ## `stag onchain create`
 
@@ -425,291 +361,6 @@ FLAG DESCRIPTIONS
     Mnemoic Backup Seed Phrase For Wallet.
 ```
 
-## `stag pay`
-
-Say hello
-
-```
-USAGE
-  $ stag pay -k <value> -a <value> -t <value> -c <value>
-
-FLAGS
-  -a, --app=<value>         (required) App namespace
-  -c, --content=<value>     (required) JSON string of message content
-  -k, --privatekey=<value>  (required) Private Key for Signing and Funds
-  -t, --type=<value>        (required) Type of message
-
-DESCRIPTION
-  Say hello
-
-EXAMPLES
-  $ stag onchain post --privatekey $KEY --app askbitcoin.ai --type question --content ''{"content": "Who is John Galt?"}'
-```
-
-_See code: [dist/commands/pay/index.ts](https://github.com/stagwallet/stag-cli/blob/v0.2.0/dist/commands/pay/index.ts)_
-
-## `stag pay addresses`
-
-Say hello world
-
-```
-USAGE
-  $ stag pay addresses
-
-DESCRIPTION
-  Say hello world
-
-EXAMPLES
-  $ stag pay addresses
-  hello world! (./src/commands/hello/world.ts)
-```
-
-## `stag pay seed`
-
-Say hello world
-
-```
-USAGE
-  $ stag pay seed
-
-DESCRIPTION
-  Say hello world
-
-EXAMPLES
-  $ stag pay seed
-  hello world! (./src/commands/hello/world.ts)
-```
-
-## `stag plugins`
-
-List installed plugins.
-
-```
-USAGE
-  $ stag plugins [--core]
-
-FLAGS
-  --core  Show core plugins.
-
-DESCRIPTION
-  List installed plugins.
-
-EXAMPLES
-  $ stag plugins
-```
-
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.1.7/src/commands/plugins/index.ts)_
-
-## `stag plugins:install PLUGIN...`
-
-Installs a plugin into the CLI.
-
-```
-USAGE
-  $ stag plugins:install PLUGIN...
-
-ARGUMENTS
-  PLUGIN  Plugin to install.
-
-FLAGS
-  -f, --force    Run yarn install with force flag.
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Installs a plugin into the CLI.
-  Can be installed from npm or a git url.
-
-  Installation of a user-installed plugin will override a core plugin.
-
-  e.g. If you have a core plugin that has a 'hello' command, installing a user-installed plugin with a 'hello' command
-  will override the core plugin implementation. This is useful if a user needs to update core plugin functionality in
-  the CLI without the need to patch and update the whole CLI.
-
-
-ALIASES
-  $ stag plugins add
-
-EXAMPLES
-  $ stag plugins:install myplugin 
-
-  $ stag plugins:install https://github.com/someuser/someplugin
-
-  $ stag plugins:install someuser/someplugin
-```
-
-## `stag plugins:inspect PLUGIN...`
-
-Displays installation properties of a plugin.
-
-```
-USAGE
-  $ stag plugins:inspect PLUGIN...
-
-ARGUMENTS
-  PLUGIN  [default: .] Plugin to inspect.
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Displays installation properties of a plugin.
-
-EXAMPLES
-  $ stag plugins:inspect myplugin
-```
-
-## `stag plugins:install PLUGIN...`
-
-Installs a plugin into the CLI.
-
-```
-USAGE
-  $ stag plugins:install PLUGIN...
-
-ARGUMENTS
-  PLUGIN  Plugin to install.
-
-FLAGS
-  -f, --force    Run yarn install with force flag.
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Installs a plugin into the CLI.
-  Can be installed from npm or a git url.
-
-  Installation of a user-installed plugin will override a core plugin.
-
-  e.g. If you have a core plugin that has a 'hello' command, installing a user-installed plugin with a 'hello' command
-  will override the core plugin implementation. This is useful if a user needs to update core plugin functionality in
-  the CLI without the need to patch and update the whole CLI.
-
-
-ALIASES
-  $ stag plugins add
-
-EXAMPLES
-  $ stag plugins:install myplugin 
-
-  $ stag plugins:install https://github.com/someuser/someplugin
-
-  $ stag plugins:install someuser/someplugin
-```
-
-## `stag plugins:link PLUGIN`
-
-Links a plugin into the CLI for development.
-
-```
-USAGE
-  $ stag plugins:link PLUGIN
-
-ARGUMENTS
-  PATH  [default: .] path to plugin
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Links a plugin into the CLI for development.
-  Installation of a linked plugin will override a user-installed or core plugin.
-
-  e.g. If you have a user-installed or core plugin that has a 'hello' command, installing a linked plugin with a 'hello'
-  command will override the user-installed or core plugin implementation. This is useful for development work.
-
-
-EXAMPLES
-  $ stag plugins:link myplugin
-```
-
-## `stag plugins:uninstall PLUGIN...`
-
-Removes a plugin from the CLI.
-
-```
-USAGE
-  $ stag plugins:uninstall PLUGIN...
-
-ARGUMENTS
-  PLUGIN  plugin to uninstall
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Removes a plugin from the CLI.
-
-ALIASES
-  $ stag plugins unlink
-  $ stag plugins remove
-```
-
-## `stag plugins:uninstall PLUGIN...`
-
-Removes a plugin from the CLI.
-
-```
-USAGE
-  $ stag plugins:uninstall PLUGIN...
-
-ARGUMENTS
-  PLUGIN  plugin to uninstall
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Removes a plugin from the CLI.
-
-ALIASES
-  $ stag plugins unlink
-  $ stag plugins remove
-```
-
-## `stag plugins:uninstall PLUGIN...`
-
-Removes a plugin from the CLI.
-
-```
-USAGE
-  $ stag plugins:uninstall PLUGIN...
-
-ARGUMENTS
-  PLUGIN  plugin to uninstall
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Removes a plugin from the CLI.
-
-ALIASES
-  $ stag plugins unlink
-  $ stag plugins remove
-```
-
-## `stag plugins update`
-
-Update installed plugins.
-
-```
-USAGE
-  $ stag plugins update [-h] [-v]
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Update installed plugins.
-```
-
 ## `stag run balances`
 
 List balances of RUN fungible tokens
@@ -728,42 +379,280 @@ EXAMPLES
   $ stag run balances
 ```
 
-## `stag run nfts PERSON`
+## `stag run ft balance`
 
-Say hello
+Get your balance of a fungible token
 
 ```
 USAGE
-  $ stag run nfts [PERSON] -f <value>
+  $ stag run ft balance -o <value>
+
+FLAGS
+  -o, --origin=<value>  (required) Origin of Token to Send
+
+DESCRIPTION
+  Get your balance of a fungible token
+
+EXAMPLES
+  $ stag run ft balance         --origin=93f9f188f93f446f6b2d93b0ff7203f96473e39ad0f58eb02663896b53c4f020_o2
+```
+
+## `stag run ft deploy PERSON`
+
+Deploy a new Run Fungible Token Coin contract
+
+```
+USAGE
+  $ stag run ft deploy [PERSON] -n <value> -d <value> -i <value> -s <value> [-p <value>] [-r <value>]
 
 ARGUMENTS
   PERSON  Person to say hello to
 
 FLAGS
-  -f, --from=<value>  (required) Who is saying hello
+  -d, --description=<value>  (required) Description of token
+  -i, --image=<value>        (required) b:// protocol image link
+  -n, --name=<value>         (required) Name of Token
+  -p, --decimals=<value>     Number of decimals
+  -r, --dryrun=<value>       Output signed transaction but do not broadcast
+  -s, --symbol=<value>       (required) Symbol of Token
 
 DESCRIPTION
-  Say hello
+  Deploy a new Run Fungible Token Coin contract
 
 EXAMPLES
-  $ oex hello friend --from oclif
-  hello friend from oclif! (./src/commands/hello/index.ts)
+  $ stag run ft deploy         --name='My Developer Token'         --description 'Use it to hire me and earn rewards'         --image=b://2373632532517983c948df2f32d89ec4a6c64ece1d71698c21b2ad027edfec60         --symbol=DEV         --decimals=8         --dryrun
 ```
 
-## `stag wallet addresses`
+## `stag run ft mint`
 
-Say hello world
+Mint fungible tokens
 
 ```
 USAGE
-  $ stag wallet addresses
+  $ stag run ft mint -o <value> -a <value> -p <value> [-d <value>]
+
+FLAGS
+  -a, --amount=<value>   (required) Amount of new tokens to mint
+  -d, --dryrun=<value>   Output signed transaction but do not broadcast
+  -o, --origin=<value>   (required) Origin of existing token contract
+  -p, --paymail=<value>  (required) Paymail to receive minted coins
 
 DESCRIPTION
-  Say hello world
+  Mint fungible tokens
 
 EXAMPLES
-  $ stag wallet addresses
-  hello world! (./src/commands/hello/world.ts)
+  $ stag run ft mint --origin=$origin --amount=100  --paymail=midasmulligan@relayx.io --dryrun
+```
+
+## `stag run ft send PERSON`
+
+Send a fungible token
+
+```
+USAGE
+  $ stag run ft send [PERSON] -a <value> -o <value> -t <value> [-r <value>]
+
+ARGUMENTS
+  PERSON  Person to say hello to
+
+FLAGS
+  -a, --amount=<value>  (required) Amount to Send
+  -o, --origin=<value>  (required) Origin of Token to Send
+  -r, --dryrun=<value>  Output signed transaction but do not broadcast
+  -t, --to=<value>      (required) Paymail Address or Bitcoin Address
+
+DESCRIPTION
+  Send a fungible token
+
+EXAMPLES
+  $ stag run ft send         --origin=$origin         --to='1FCKGH5tTjSkLgiQEKzoaKzDcBCD5dVHX6'         --paymail=midasmulligan@relayx.io         --amount 21800         --dryrun=true
+```
+
+## `stag social comment`
+
+Comment on a bSocial onchain post
+
+```
+USAGE
+  $ stag social comment -c <value> -t <value> [-a <value>]
+
+FLAGS
+  -a, --author=<value>   Whether or not to post with your bitcoin identity or anon
+  -c, --comment=<value>  (required) Content of the comment
+  -t, --txid=<value>     (required) Txid of post being commented upon
+
+DESCRIPTION
+  Comment on a bSocial onchain post
+
+EXAMPLES
+  $ stag social comment --comment="Wow quite a profound statement you made there --txid=$OP_TXID
+```
+
+## `stag social follow`
+
+Comment on a bSocial onchain post
+
+```
+USAGE
+  $ stag social follow -c <value> -t <value> [-a <value>]
+
+FLAGS
+  -a, --author=<value>   Whether or not to post with your bitcoin identity or anon
+  -c, --comment=<value>  (required) Content of the comment
+  -t, --txid=<value>     (required) Txid of post being commented upon
+
+DESCRIPTION
+  Comment on a bSocial onchain post
+
+EXAMPLES
+  $ stag social comment --comment="Wow quite a profound statement you made there --txid=$OP_TXID
+```
+
+## `stag social like`
+
+Comment on a bSocial onchain post
+
+```
+USAGE
+  $ stag social like -c <value> -t <value> [-a <value>]
+
+FLAGS
+  -a, --author=<value>   Whether or not to post with your bitcoin identity or anon
+  -c, --comment=<value>  (required) Content of the comment
+  -t, --txid=<value>     (required) Txid of post being commented upon
+
+DESCRIPTION
+  Comment on a bSocial onchain post
+
+EXAMPLES
+  $ stag social comment --comment="Wow quite a profound statement you made there --txid=$OP_TXID
+```
+
+## `stag social post`
+
+Post to the blockchain using bSocial protocol
+
+```
+USAGE
+  $ stag social post -c <value> -d <value> -s <value> [--category <value>] [-t <value>] [-m <value>] [--seed
+    <value>]
+
+FLAGS
+  -c, --content=<value>     (required) Txid of content to boost
+  -d, --difficulty=<value>  (required) Difficulty for work order
+  -m, --miner=<value>       Public address of miner for contract
+  -s, --satoshis=<value>    (required) Value paid for job in satoshis
+  -t, --tag=<value>         Tag will be converted to hex
+  --category=<value>        Category will be converted to hex
+  --seed=<value>            Backup Seed Phrase Words
+
+DESCRIPTION
+  Post to the blockchain using bSocial protocol
+
+EXAMPLES
+  $ stag social post --content='#Big Announcement' --content-type=text/markdown
+
+  $ stag social post --file=/path/to/my/big_announcement.md
+
+  $ stag social comment --comment="Wow quite a profound statement you made there --txid=$OP_TXID
+```
+
+## `stag social reply`
+
+Comment on a bSocial onchain post
+
+```
+USAGE
+  $ stag social reply -c <value> -t <value> [-a <value>]
+
+FLAGS
+  -a, --author=<value>   Whether or not to post with your bitcoin identity or anon
+  -c, --comment=<value>  (required) Content of the comment
+  -t, --txid=<value>     (required) Txid of post being commented upon
+
+DESCRIPTION
+  Comment on a bSocial onchain post
+
+EXAMPLES
+  $ stag social comment --comment="Wow quite a profound statement you made there --txid=$OP_TXID
+```
+
+## `stag social repost`
+
+Comment on a bSocial onchain post
+
+```
+USAGE
+  $ stag social repost -c <value> -t <value> [-a <value>]
+
+FLAGS
+  -a, --author=<value>   Whether or not to post with your bitcoin identity or anon
+  -c, --comment=<value>  (required) Content of the comment
+  -t, --txid=<value>     (required) Txid of post being commented upon
+
+DESCRIPTION
+  Comment on a bSocial onchain post
+
+EXAMPLES
+  $ stag social comment --comment="Wow quite a profound statement you made there --txid=$OP_TXID
+```
+
+## `stag social unfollow`
+
+Comment on a bSocial onchain post
+
+```
+USAGE
+  $ stag social unfollow -c <value> -t <value> [-a <value>]
+
+FLAGS
+  -a, --author=<value>   Whether or not to post with your bitcoin identity or anon
+  -c, --comment=<value>  (required) Content of the comment
+  -t, --txid=<value>     (required) Txid of post being commented upon
+
+DESCRIPTION
+  Comment on a bSocial onchain post
+
+EXAMPLES
+  $ stag social comment --comment="Wow quite a profound statement you made there --txid=$OP_TXID
+```
+
+## `stag social unlike`
+
+Comment on a bSocial onchain post
+
+```
+USAGE
+  $ stag social unlike -c <value> -t <value> [-a <value>]
+
+FLAGS
+  -a, --author=<value>   Whether or not to post with your bitcoin identity or anon
+  -c, --comment=<value>  (required) Content of the comment
+  -t, --txid=<value>     (required) Txid of post being commented upon
+
+DESCRIPTION
+  Comment on a bSocial onchain post
+
+EXAMPLES
+  $ stag social comment --comment="Wow quite a profound statement you made there --txid=$OP_TXID
+```
+
+## `stag wallet backup`
+
+Show Wallet Backup Seed Phrase
+
+```
+USAGE
+  $ stag wallet backup [-n <value>]
+
+FLAGS
+  -n, --name=<value>  Name of wallet - it must already exist
+
+DESCRIPTION
+  Show Wallet Backup Seed Phrase
+
+EXAMPLES
+  $ stag wallet seed --name mywallet
 ```
 
 ## `stag wallet create`
@@ -772,12 +661,10 @@ Create New Or Import Existing Wallet
 
 ```
 USAGE
-  $ stag wallet create [--json] [-c <value>] [-f <value>] [-s <value>]
+  $ stag wallet create -n <value> [--json]
 
 FLAGS
-  -c, --config=<value>  Path to config file that will store recovery keys
-  -f, --force=<value>   Destructively Overrides existing confiuration.
-  -s, --seed=<value>    Import recovery seed phrase instead of generating new keys
+  -n, --name=<value>  (required) Name of wallet - it must be unique
 
 GLOBAL FLAGS
   --json  Format output as json.
@@ -786,42 +673,64 @@ DESCRIPTION
   Create New Or Import Existing Wallet
 
 EXAMPLES
-  $ stag init --config=/etc/stag/config.json'
+  $ stag wallet create --name mywallet
 ```
 
 ## `stag wallet import`
+
+Create Import Existing Wallet From Seed Phrase
+
+```
+USAGE
+  $ stag wallet import -s <value> -n <value>
+
+FLAGS
+  -n, --name=<value>  (required) Name of wallet - it must be unique
+  -s, --seed=<value>  (required) Import recovery seed phrase instead of generating new keys
+
+DESCRIPTION
+  Create Import Existing Wallet From Seed Phrase
+
+EXAMPLES
+  $ stag wallet import --seed $seedphrase --name midasmulligan@relayx.io
+```
+
+## `stag wallet info`
+
+List Wallet Addresses and Balances
+
+```
+USAGE
+  $ stag wallet info [-n <value>]
+
+FLAGS
+  -n, --name=<value>  Name of wallet - will use current wallet by default
+
+DESCRIPTION
+  List Wallet Addresses and Balances
+
+EXAMPLES
+  $ stag wallet info
+```
+
+## `stag wallet use NAME`
 
 Create New Or Import Existing Wallet
 
 ```
 USAGE
-  $ stag wallet import [-c <value>] [-f <value>] [-s <value>]
+  $ stag wallet use [NAME] [--json]
 
-FLAGS
-  -c, --config=<value>  Path to config file that will store recovery keys
-  -f, --force=<value>   Destructively Overrides existing confiuration.
-  -s, --seed=<value>    Import recovery seed phrase instead of generating new keys
+ARGUMENTS
+  NAME  Name of wallet - it must already exist
+
+GLOBAL FLAGS
+  --json  Format output as json.
 
 DESCRIPTION
   Create New Or Import Existing Wallet
 
 EXAMPLES
-  $ stag init --config=/etc/stag/config.json'
-```
-
-## `stag wallet seed`
-
-Say hello world
-
-```
-USAGE
-  $ stag wallet seed
-
-DESCRIPTION
-  Say hello world
-
-EXAMPLES
-  $ stag wallet seed
-  hello world! (./src/commands/hello/world.ts)
+  $ stag wallet use midasmulligan@relayx.io
 ```
 <!-- commandsstop -->

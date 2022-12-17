@@ -14,11 +14,13 @@
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^2.1.7",
     "@runonbitcoin/easy-b": "^0.2.2",
+    "@runonbitcoin/nimble": "^1.0.14",
     "@runonbitcoin/tokenkit": "^1.1.0",
     "bip39": "^3.0.4",
     "boostminer": "^0.5.1",
     "bsv": "^1.5.6",
     "conf-cli": "^0.1.9",
+    "run-sdk": "^0.6.41",
     "stag-wallet": "^0.0.16"
   },
   "devDependencies": {
